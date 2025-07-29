@@ -13,7 +13,7 @@ A simple WebSocket chat application built with PHP and [Open Swoole](https://ope
 
 1. **Clone the repository:**
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/lgme/openswoole-php
 ```` 
 - cd <your-project-directory>
 
