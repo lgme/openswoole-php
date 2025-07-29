@@ -1,0 +1,12 @@
+version: '3.8'
+services:
+  app:
+    build: .
+    container_name: websocket-app
+    volumes:
+      - ./src:/www
+    ports:
+      - '9501:9501'
+    environment:
+      - COMPOSER_ALLOW_SUPERUSER=1
+    command: php server.php

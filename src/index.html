@@ -1,0 +1,94 @@
+<!doctype html>
+<html>
+<head>
+    <title>WebSocket with PHP and Open Swoole</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+        h2 {
+            color: #333;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px 0;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        input {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        #output {
+            margin-top: 20px;
+            background-color: #f9f9f9;
+            padding: 10px;
+            border-radius: 5px;
+            height: 150px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            color: #555;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>WebSocket Client</h2>
+        <input type="text" id="message" placeholder="Type your message here...">
+        <button onclick="sendMessage()">Send Message</button>
+        <div id="output"></div>
+    </div>
+
+    <script>
+        let socket;
+        append = function (text) {
+            document.getElementById("output").insertAdjacentHTML('beforeend', text + "<br>");
+        }
+        window.onload = function () {
+            socket = new WebSocket('ws://127.0.0.1:9501');
+            socket.onmessage = function (event) {
+                append(event.data)
+            }
+            socket.onopen = function () {
+                append("Connected to server");
+            }
+            socket.onclose = function () {
+                append("Connection closed");
+            }
+            socket.onerror = function () {
+                append("Error occured");
+            }
+        }
+
+        function sendMessage(event) {
+            let message = document.getElementById("message").value;
+            socket.send(message);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+{
+    "require-dev": {
+        "openswoole/ide-helper": "^22.1"
+    },
+    "platform": {
+        "php": "^8.4"
+    }
+}
